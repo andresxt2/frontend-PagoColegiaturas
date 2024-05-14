@@ -1,8 +1,23 @@
 
 import { Link } from 'react-router-dom';
 import "./Header.css";
+import { Outlet } from 'react-router-dom';
+
+const links = [
+  {
+    title: 'Inicio',
+    url: '/'
+  },
+  {
+    title: 'Secciones',
+    url: '/secciones'
+  }
+]
+
+
 const Header = () => {
   return (
+    <>
     <header className='mb-5'>
       <nav className="navbar navbar-expand-md bg-black fixed-top" data-bs-theme="dark">
         <div className="container-fluid">
@@ -21,19 +36,23 @@ const Header = () => {
             </div>
             <div className="offcanvas-body bg-black">
               <ul className="navbar-nav justify-content-start flex-grow-1 pe-3 mt-2" style={{ fontFamily: "'Cambria', sans-serif" }}>
-                <li className="nav-item links">
-                  <a className="nav-link active" aria-current="page" href="#">Inicio</a>
-                </li>
-                <li className="nav-item links">
-                  <a className="nav-link" href="secciones.html">Secciones</a>
-                </li>
+      
+              {links.map((link) => (
+                  <li key={link.title} className="nav-item links">
+                    <Link className="nav-link" to={link.url}>{link.title}</Link>
+                  </li>
+                ))}
+                            
               </ul>
             </div>
           </div>
         </div>
       </nav>
     </header>
-  );
+
+        <Outlet/>
+</>
+);
 };
 
 export default Header;
